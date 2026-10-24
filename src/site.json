@@ -1,0 +1,45 @@
+{
+  "_comment": "Данные бизнеса. Пустая строка = на сайте будет видимая заглушка. После правки запустите: python3 src/build.py",
+
+  "base_url": "https://pallsmi.github.io/otdelka-minsk/",
+
+  "brand": { "ru": "Отделка Минск", "be": "Аздабленне Мінск" },
+
+  "phone": "",
+  "phone_display": "",
+  "telegram_username": "",
+  "viber_phone": "",
+  "whatsapp_phone": "",
+  "email": "",
+
+  "hours": { "ru": "", "be": "" },
+  "area_extra": { "ru": "", "be": "" },
+  "legal_line": { "ru": "", "be": "" },
+  "privacy_operator": { "ru": "", "be": "" },
+  "privacy_retention": { "ru": "", "be": "" },
+
+  "form": {
+    "_comment": "provider: web3forms | formspree | webhook | пусто. Пока пусто — форма собирает текст заявки и предлагает отправить его в мессенджер.",
+    "provider": "",
+    "endpoint": "",
+    "access_key": ""
+  },
+
+  "gallery": [
+    { "id": "lift-geometry", "kind": "photo", "img": "lift-geometry", "cats": ["entrance", "decor"] },
+    { "id": "mural",         "kind": "video", "img": "mural",         "video": "mural",        "dur": "0:21", "cats": ["flat", "decor"] },
+    { "id": "hall-geometry", "kind": "photo", "img": "hall-geometry", "cats": ["entrance", "decor"] },
+    { "id": "bath",          "kind": "video", "img": "bath",          "video": "bath",         "dur": "0:36", "cats": ["bath"] },
+    { "id": "lift-leaves",   "kind": "photo", "img": "lift-leaves",   "cats": ["entrance", "decor"] },
+    { "id": "dark-ceiling",  "kind": "video", "img": "dark-ceiling",  "video": "dark-ceiling", "dur": "0:29", "cats": ["flat"] },
+    { "id": "tape",          "kind": "video", "img": "tape",          "video": "tape",         "dur": "0:32", "cats": ["flat", "decor"] },
+    { "id": "mailboxes",     "kind": "photo", "img": "mailboxes",     "cats": ["entrance", "decor"] },
+    { "id": "door",          "kind": "video", "img": "door",          "video": "door",         "dur": "0:22", "cats": ["flat"] },
+    { "id": "entrance",      "kind": "photo", "img": "entrance",      "cats": ["entrance"] },
+    { "id": "rooms",         "kind": "video", "img": "wallpaper",     "video": "rooms",        "dur": "0:54", "cats": ["flat"] },
+    { "id": "wc",            "kind": "video", "img": "wc",            "video": "wc",           "dur": "0:18", "cats": ["bath"] },
+    { "id": "stair-leaves",  "kind": "photo", "img": "stair-leaves",  "cats": ["entrance", "decor"] },
+    { "id": "plaster",       "kind": "video", "img": "plaster",       "video": "plaster",      "dur": "0:54", "cats": ["flat"] },
+    { "id": "new-room",      "kind": "photo", "img": "new-room",      "cats": ["flat"] }
+  ]
+}

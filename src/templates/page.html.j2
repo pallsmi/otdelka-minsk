@@ -1,0 +1,341 @@
+{%- from "macros.j2" import pic, icon with context -%}
+<!doctype html>
+<html lang="{{ t.lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ t.meta_title }} | {{ brand }}</title>
+<meta name="description" content="{{ t.meta_description }}">
+<meta name="theme-color" content="#30373B">
+<meta name="format-detection" content="telephone=no">
+{%- if base_url %}
+<link rel="canonical" href="{{ page_url }}">
+{%- for alt in alternates %}
+<link rel="alternate" hreflang="{{ alt.hreflang }}" href="{{ alt.url }}">
+{%- endfor %}
+<link rel="alternate" hreflang="x-default" href="{{ base_url }}">
+{%- endif %}
+<meta property="og:type" content="website">
+<meta property="og:locale" content="{{ t.locale }}">
+<meta property="og:site_name" content="{{ brand }}">
+<meta property="og:title" content="{{ t.meta_title }}">
+<meta property="og:description" content="{{ t.meta_description }}">
+<meta property="og:image" content="{{ og_image }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ t.og_alt }}">
+{%- if base_url %}<meta property="og:url" content="{{ page_url }}">{% endif %}
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="{{ root }}assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{{ root }}assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="{{ root }}assets/apple-touch-icon.png">
+<link rel="preload" href="{{ root }}assets/fonts/unbounded-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ root }}assets/fonts/onest-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" type="image/webp" href="{{ root }}assets/img/lift-geometry-800.webp" imagesrcset="{{ root }}assets/img/lift-geometry-480.webp 480w, {{ root }}assets/img/lift-geometry-800.webp 800w" imagesizes="(min-width: 900px) 40vw, 86vw" fetchpriority="high">
+<link rel="stylesheet" href="{{ root }}css/style.css?v={{ v }}">
+<script type="application/ld+json">{{ ld_business | safe }}</script>
+<script type="application/ld+json">{{ ld_faq | safe }}</script>
+</head>
+<body>
+<a class="skip" href="#main">{{ t.skip }}</a>
+
+<header class="site-header" id="top">
+  <div class="wrap header-row">
+    <a class="brand" href="{{ home_href }}" aria-label="{{ brand }}">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#A8E22B"/><path d="M6 25 L14 7 L26 25 Z M14 7 L18.5 25" fill="none" stroke="#1F2427" stroke-width="2.4" stroke-linejoin="round"/></svg>
+      <span>{{ brand }}</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="{{ t.menu }}">
+      <ul>
+        <li><a href="#services">{{ t.nav.services }}</a></li>
+        <li><a href="#works">{{ t.nav.works }}</a></li>
+        <li><a href="#process">{{ t.nav.process }}</a></li>
+        <li><a href="#price">{{ t.nav.price }}</a></li>
+        <li><a href="#faq">{{ t.nav.faq }}</a></li>
+        <li><a href="#contact">{{ t.nav.contact }}</a></li>
+      </ul>
+      <a class="nav-phone{% if not phone %} todo{% endif %}" href="{{ tel_href }}">{{ icon('phone') }}<span>{{ phone_text }}</span></a>
+    </nav>
+    <div class="header-tools">
+      <div class="lang" role="group" aria-label="{{ t.lang_switch_label }}">
+        <a href="{{ lang_links.ru }}" hreflang="ru" lang="ru"{% if t.lang == 'ru' %} aria-current="true"{% endif %}>Рус</a>
+        <a href="{{ lang_links.be }}" hreflang="be" lang="be"{% if t.lang == 'be' %} aria-current="true"{% endif %}>Бел</a>
+      </div>
+      <a class="header-call{% if not phone %} todo{% endif %}" href="{{ tel_href }}">{{ icon('phone') }}<span>{{ phone_text }}</span></a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="nav" data-open="{{ t.menu }}" data-close="{{ t.menu_close }}" aria-label="{{ t.menu }}">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" aria-labelledby="hero-title">
+  <svg class="hero-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    <line x1="52" y1="100" x2="100" y2="38" pathLength="1"/>
+    <line x1="70" y1="0" x2="100" y2="58" pathLength="1"/>
+    <line x1="62" y1="44" x2="100" y2="96" pathLength="1"/>
+    <line x1="82" y1="0" x2="58" y2="100" pathLength="1"/>
+    <line x1="0" y1="86" x2="44" y2="100" pathLength="1"/>
+  </svg>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1 id="hero-title">{{ t.hero_title }}</h1>
+      <p class="hero-lead">{{ t.hero_lead }}</p>
+      <div class="hero-actions">
+        <a class="btn btn-tape" href="#contact">{{ t.cta_quote }}</a>
+        <a class="btn btn-ghost{% if not phone %} todo{% endif %}" href="{{ tel_href }}">{{ icon('phone') }}{{ t.cta_call }}</a>
+      </div>
+      <ul class="hero-tags" aria-label="{{ t.hero_tags_label }}">
+        {%- for tag in t.hero_tags %}<li>{{ tag }}</li>{% endfor %}
+      </ul>
+    </div>
+    <figure class="hero-photo">
+      {{ pic('lift-geometry', '(min-width: 900px) 40vw, 86vw', t.hero_caption, loading='eager', priority=true) }}
+      <figcaption>{{ t.hero_caption }}</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section services" id="services" aria-labelledby="services-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="services-title">{{ t.services_title }}</h2>
+      <p>{{ t.services_lead }}</p>
+    </div>
+    <ul class="svc">
+      {%- for s_ in t.services %}
+      <li>
+        {{ pic(s_.img, '(min-width: 900px) 128px, 96px', '', cls='svc-img') }}
+        <div>
+          <h3>{{ s_.title }}</h3>
+          <p>{{ s_.text }}</p>
+        </div>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section works" id="works" aria-labelledby="works-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="works-title">{{ t.works_title }}</h2>
+      <p>{{ t.works_lead }}</p>
+    </div>
+    <div class="filters" role="group" aria-label="{{ t.filters_label }}">
+      {%- for key, label in t.filters.items() %}
+      <button type="button" data-filter="{{ key }}" aria-pressed="{{ 'true' if key == 'all' else 'false' }}">{{ label }}</button>
+      {%- endfor %}
+    </div>
+    <ul class="grid" id="grid">
+      {%- for g in gallery %}
+      <li data-cats="{{ g.cats | join(' ') }}">
+        <figure>
+          <button class="tile" type="button" data-index="{{ loop.index0 }}">
+            <span class="sr-only">{{ (t.open_video if g.kind == 'video' else t.open_photo) }}: {{ t.captions[g.id] }}</span>
+            {{ pic(g.img, '(min-width: 1040px) 280px, (min-width: 600px) 30vw, 46vw', '') }}
+            {%- if g.kind == 'video' %}
+            <span class="play" aria-hidden="true">{{ icon('play') }}<span>{{ g.dur }}</span></span>
+            {%- endif %}
+          </button>
+          <figcaption>{{ t.captions[g.id] }}</figcaption>
+        </figure>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section details" aria-labelledby="details-title">
+  <div class="wrap details-grid">
+    <figure class="details-media">
+      <button class="tile" type="button" data-index="{{ tape_index }}">
+        <span class="sr-only">{{ t.open_video }}: {{ t.captions['tape'] }}</span>
+        {{ pic('tape', '(min-width: 900px) 360px, 70vw', '') }}
+        <span class="play" aria-hidden="true">{{ icon('play') }}<span>0:32</span></span>
+      </button>
+      <figcaption>{{ t.details_caption }}</figcaption>
+    </figure>
+    <div>
+      <h2 id="details-title">{{ t.details_title }}</h2>
+      <ul class="points">
+        {%- for d in t.details %}
+        <li><h3>{{ d.title }}</h3><p>{{ d.text }}</p></li>
+        {%- endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section process" id="process" aria-labelledby="process-title">
+  <div class="wrap">
+    <h2 id="process-title">{{ t.process_title }}</h2>
+    <ol class="steps">
+      {%- for p in t.process %}
+      <li><h3>{{ p.title }}</h3><p>{{ p.text }}</p></li>
+      {%- endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="section price" id="price" aria-labelledby="price-title">
+  <div class="wrap price-grid">
+    <div>
+      <h2 id="price-title">{{ t.price_title }}</h2>
+      <p class="price-text">{{ t.price_text }}</p>
+    </div>
+    <div class="price-card">
+      <h3>{{ t.price_factors_title }}</h3>
+      <ul class="factors">
+        {%- for f in t.price_factors %}<li>{{ f }}</li>{% endfor %}
+      </ul>
+      <p>{{ t.price_cta_text }}</p>
+      <a class="btn btn-ink" href="#contact">{{ t.price_cta }}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section faq" id="faq" aria-labelledby="faq-title">
+  <div class="wrap faq-wrap">
+    <h2 id="faq-title">{{ t.faq_title }}</h2>
+    <div class="faq-list">
+      {%- for f in t.faq %}
+      <details>
+        <summary>{{ f.q }}</summary>
+        <p>{{ f.a }}</p>
+      </details>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap contact-grid">
+    <div class="contact-info">
+      <h2 id="contact-title">{{ t.contact_title }}</h2>
+      <p class="contact-lead">{{ t.contact_lead }}</p>
+      <dl>
+        <div>
+          <dt>{{ t.c_phone }}</dt>
+          <dd><a class="big-phone{% if not phone %} todo{% endif %}" href="{{ tel_href }}">{{ phone_text }}</a></dd>
+        </div>
+        <div>
+          <dt>{{ t.c_messengers }}</dt>
+          <dd class="messengers">
+            {%- for m in messengers %}
+            <a class="msg{% if m.todo %} todo{% endif %}" href="{{ m.href }}"{% if not m.todo and m.external %} target="_blank" rel="noopener"{% endif %}>{{ icon(m.icon) }}<span>{{ m.label }}</span></a>
+            {%- endfor %}
+          </dd>
+        </div>
+        <div>
+          <dt>{{ t.c_area }}</dt>
+          <dd>{{ t.c_area_city }}{% if area_extra %}, {{ area_extra }}{% endif %}</dd>
+        </div>
+        <div>
+          <dt>{{ t.c_hours }}</dt>
+          <dd{% if not hours %} class="todo"{% endif %}>{{ hours or t.todo_hours }}</dd>
+        </div>
+      </dl>
+    </div>
+
+    <form class="form" id="lead-form" novalidate
+          data-provider="{{ form.provider }}" data-endpoint="{{ form.endpoint }}"
+          data-ok="{{ t.f_ok }}" data-err="{{ t.f_err }}" data-sending="{{ t.f_sending }}"
+          data-header="{{ t.f_msg_header }}" data-brand="{{ brand }}">
+      {%- if form.provider == 'web3forms' and form.access_key %}
+      <input type="hidden" name="access_key" value="{{ form.access_key }}">
+      <input type="hidden" name="subject" value="{{ t.f_msg_header }} — {{ brand }}">
+      {%- endif %}
+      <div class="hp" aria-hidden="true">
+        <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      </div>
+      <div class="field">
+        <label for="f-name">{{ t.f_name }}</label>
+        <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="80" aria-describedby="f-name-err">
+        <p class="err" id="f-name-err" data-msg="{{ t.f_err_name }}"></p>
+      </div>
+      <div class="field">
+        <label for="f-phone">{{ t.f_phone }}</label>
+        <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375 __ ___-__-__" required aria-describedby="f-phone-err">
+        <p class="err" id="f-phone-err" data-msg="{{ t.f_err_phone }}"></p>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="f-work">{{ t.f_work }}</label>
+          <select id="f-work" name="work">
+            {%- for o in t.f_work_options %}<option>{{ o }}</option>{% endfor %}
+          </select>
+        </div>
+        <div class="field field-area">
+          <label for="f-area">{{ t.f_area }} <span class="hint">{{ t.f_area_hint }}</span></label>
+          <input id="f-area" name="area" type="number" inputmode="decimal" min="1" max="10000" step="any">
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-msg">{{ t.f_msg }}</label>
+        <textarea id="f-msg" name="message" rows="3" maxlength="1500" placeholder="{{ t.f_msg_ph }}"></textarea>
+      </div>
+      <div class="field check">
+        <input id="f-consent" name="consent" type="checkbox" required aria-describedby="f-consent-err">
+        <label for="f-consent">{{ t.f_consent }} <a href="{{ privacy_href }}">{{ t.f_policy }}</a></label>
+        <p class="err" id="f-consent-err" data-msg="{{ t.f_err_consent }}"></p>
+      </div>
+      <button class="btn btn-tape btn-wide" type="submit">{{ t.f_submit }}</button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <div>
+      <p class="footer-brand">{{ brand }}</p>
+      <p>{{ t.footer_tagline }}</p>
+      <p{% if not legal %} class="todo"{% endif %}>{{ legal or t.todo_legal }}</p>
+    </div>
+    <div class="footer-links">
+      <a href="{{ privacy_href }}">{{ t.footer_policy }}</a>
+      <a href="#top">{{ t.to_top }}</a>
+      <p>© <span data-year>{{ year }}</span> {{ brand }}</p>
+    </div>
+  </div>
+</footer>
+
+<nav class="bar" aria-label="{{ t.nav.contact }}">
+  <a class="{% if not phone %}todo{% endif %}" href="{{ tel_href }}">{{ icon('phone') }}<span>{{ t.bar_call }}</span></a>
+  <a class="{% if primary_messenger.todo %}todo{% endif %}" href="{{ primary_messenger.href }}"{% if not primary_messenger.todo and primary_messenger.external %} target="_blank" rel="noopener"{% endif %}>{{ icon('chat') }}<span>{{ t.bar_write }}</span></a>
+  <a class="bar-cta" href="#contact">{{ icon('form') }}<span>{{ t.bar_form }}</span></a>
+</nav>
+
+<dialog class="lightbox" id="lightbox" aria-label="{{ t.works_title }}">
+  <div class="lb-stage"></div>
+  <p class="lb-caption"></p>
+  <button class="lb-btn lb-close" type="button" aria-label="{{ t.lb_close }}">{{ icon('close') }}</button>
+  <button class="lb-btn lb-prev" type="button" aria-label="{{ t.lb_prev }}">{{ icon('left') }}</button>
+  <button class="lb-btn lb-next" type="button" aria-label="{{ t.lb_next }}">{{ icon('right') }}</button>
+</dialog>
+
+<dialog class="sheet" id="offline" aria-labelledby="offline-title">
+  <div class="sheet-body">
+    <h2 id="offline-title">{{ t.f_offline_title }}</h2>
+    <p>{{ t.f_offline }}</p>
+    <textarea id="offline-text" rows="7" readonly></textarea>
+    <div class="sheet-actions">
+      <button class="btn btn-ink" type="button" id="offline-copy" data-done="{{ t.f_copied }}">{{ t.f_copy }}</button>
+      {%- for m in messengers if not m.todo %}
+      <a class="btn btn-line" href="{{ m.href }}" data-msg-kind="{{ m.icon }}"{% if m.external %} target="_blank" rel="noopener"{% endif %}>{{ m.label }}</a>
+      {%- endfor %}
+      {%- if phone %}<a class="btn btn-line" href="{{ tel_href }}">{{ t.cta_call }}</a>{% endif %}
+    </div>
+    <button class="lb-btn sheet-close" type="button" aria-label="{{ t.lb_close }}">{{ icon('close') }}</button>
+  </div>
+</dialog>
+
+<script type="application/json" id="gallery-data">{{ gallery_json | safe }}</script>
+<script src="{{ root }}js/main.js?v={{ v }}" defer></script>
+</body>
+</html>

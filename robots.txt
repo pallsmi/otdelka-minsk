@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pallsmi.github.io/otdelka-minsk/sitemap.xml

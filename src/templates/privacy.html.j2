@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="{{ t.lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ t.privacy_title }} | {{ brand }}</title>
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#30373B">
+<link rel="icon" href="{{ root }}assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="{{ root }}css/style.css?v={{ v }}">
+</head>
+<body class="page-plain">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="{{ home_href }}">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#A8E22B"/><path d="M6 25 L14 7 L26 25 Z M14 7 L18.5 25" fill="none" stroke="#1F2427" stroke-width="2.4" stroke-linejoin="round"/></svg>
+      <span>{{ brand }}</span>
+    </a>
+    <div class="header-tools">
+      <div class="lang" role="group" aria-label="{{ t.lang_switch_label }}">
+        <a href="{{ lang_links.ru }}" hreflang="ru" lang="ru"{% if t.lang == 'ru' %} aria-current="true"{% endif %}>Рус</a>
+        <a href="{{ lang_links.be }}" hreflang="be" lang="be"{% if t.lang == 'be' %} aria-current="true"{% endif %}>Бел</a>
+      </div>
+    </div>
+  </div>
+</header>
+<main class="section">
+  <div class="wrap prose">
+    <h1>{{ t.privacy_title }}</h1>
+    {%- for block in t.privacy %}
+    <h2>{{ block.h }}</h2>
+    {%- set text = block.p.replace('{operator}', operator or t.todo_operator).replace('{retention}', retention or t.todo_retention) %}
+    <p{% if (block.p == '{operator}' and not operator) or (block.p == '{retention}' and not retention) %} class="todo"{% endif %}>{{ text }}</p>
+    {%- endfor %}
+    <p class="muted">{{ t.privacy_law }}</p>
+    <p><a class="btn btn-ink" href="{{ home_href }}">{{ t.privacy_back }}</a></p>
+  </div>
+</main>
+</body>
+</html>
