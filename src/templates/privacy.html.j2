@@ -6,6 +6,7 @@
 <title>{{ t.privacy_title }} | {{ brand }}</title>
 <meta name="robots" content="noindex, follow">
 <meta name="theme-color" content="#30373B">
+<meta name="color-scheme" content="light">
 <link rel="icon" href="{{ root }}assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="{{ root }}css/style.css?v={{ v }}">
 </head>
@@ -26,7 +27,7 @@
 </header>
 <main class="section">
   <div class="wrap prose">
-    <h1>{{ t.privacy_title }}</h1>
+    <h1>{{ t.privacy_h1 }}</h1>
     {%- for block in t.privacy %}
     <h2>{{ block.h }}</h2>
     {%- set text = block.p.replace('{operator}', operator or t.todo_operator).replace('{retention}', retention or t.todo_retention) %}

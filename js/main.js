@@ -14,15 +14,20 @@
   if (burger && nav) {
     var setMenu = function (open) {
       nav.classList.toggle('open', open);
+      document.documentElement.classList.toggle('menu-open', open);
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       burger.setAttribute('aria-label', open ? burger.dataset.close : burger.dataset.open);
     };
     burger.addEventListener('click', function () { setMenu(!nav.classList.contains('open')); });
     nav.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+    // Нажатие мимо открытого меню закрывает его
+    document.addEventListener('click', function (e) {
+      if (nav.classList.contains('open') && !nav.contains(e.target) && !burger.contains(e.target)) setMenu(false);
+    });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && nav.classList.contains('open')) { setMenu(false); burger.focus(); }
     });
-    window.matchMedia('(min-width: 1040px)').addEventListener('change', function () { setMenu(false); });
+    window.matchMedia('(min-width: 1120px)').addEventListener('change', function () { setMenu(false); });
   }
 
   /* ---------- Фильтр работ ---------- */
@@ -122,7 +127,8 @@
     $('.lb-close', lb).addEventListener('click', close);
     $('.lb-prev', lb).addEventListener('click', function () { step(-1); });
     $('.lb-next', lb).addEventListener('click', function () { step(1); });
-    stage.addEventListener('click', function (e) { if (e.target === stage) close(); });
+    // Клик по тёмному фону вокруг фото закрывает просмотр
+    lb.addEventListener('click', function (e) { if (e.target === lb || e.target === stage) close(); });
     lb.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
       if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
@@ -170,7 +176,11 @@
   };
   if (phone) {
     phone.addEventListener('focus', function () { if (!phone.value) phone.value = '+375 '; });
-    phone.addEventListener('blur', function () { if (phone.value.trim() === '+375') phone.value = ''; });
+    phone.addEventListener('blur', function () {
+      if (phone.value.trim() === '+375') { phone.value = ''; return; }
+      var d = phoneDigits(phone.value);
+      if (d.indexOf('375') === 0 && d.length === 12) phone.value = formatBY(d);   // привести к единому виду после правок
+    });
     phone.addEventListener('input', function (e) {
       if (e.inputType && e.inputType.indexOf('delete') === 0) return;
       var atEnd = phone.selectionStart === phone.value.length;
@@ -203,22 +213,38 @@
     return ok;
   };
 
+  var areaValue = function (v) {
+    v = (v || '').trim().replace(',', '.');
+    if (!v) return null;
+    var n = Number(v);
+    return /^\d+(\.\d+)?$/.test(v) && n > 0 && n <= 10000 ? n : NaN;
+  };
+
+  var checks = {
+    name: function (f) { return f.value.trim().length >= 2; },
+    phone: function (f) { return phoneValid(f.value); },
+    area: function (f) { return !isNaN(areaValue(f.value)); },
+    consent: function (f) { return f.checked; }
+  };
+  var order = ['name', 'phone', 'area', 'consent'];
+  var checkField = function (n) { return setError(form.elements[n], checks[n](form.elements[n])); };
+
+  // Полная проверка — только при отправке; фокус уходит на первое поле с ошибкой.
   var validate = function () {
-    var name = form.elements.name, tel = form.elements.phone, consent = form.elements.consent;
-    var results = [
-      [name, name.value.trim().length >= 2],
-      [tel, phoneValid(tel.value)],
-      [consent, consent.checked]
-    ];
     var firstBad = null;
-    results.forEach(function (r) { if (!setError(r[0], r[1]) && !firstBad) firstBad = r[0]; });
+    order.forEach(function (n) { if (!checkField(n) && !firstBad) firstBad = form.elements[n]; });
     if (firstBad) firstBad.focus();
     return !firstBad;
   };
 
-  ['name', 'phone'].forEach(function (n) {
-    form.elements[n].addEventListener('blur', function () {
-      if (form.elements[n].getAttribute('aria-invalid') === 'true') validate();
+  // После неудачной отправки поле перепроверяется само по себе и фокус не трогает.
+  ['name', 'phone', 'area'].forEach(function (n) {
+    var f = form.elements[n];
+    f.addEventListener('blur', function () {
+      if (f.getAttribute('aria-invalid') === 'true') checkField(n);
+    });
+    f.addEventListener('input', function () {
+      if (f.getAttribute('aria-invalid') === 'true' && checks[n](f)) setError(f, true);
     });
   });
   form.elements.consent.addEventListener('change', function () {
@@ -242,7 +268,7 @@
     var lines = [form.dataset.header + ' — ' + form.dataset.brand];
     lines.push(labelText('f-name') + ': ' + d.name);
     lines.push(labelText('f-phone') + ': ' + d.phone);
-    lines.push(labelText('f-work') + ': ' + d.work);
+    if (d.work) lines.push(labelText('f-work') + ': ' + d.work);
     if (d.area) lines.push(labelText('f-area') + ': ' + d.area);
     if (d.message) lines.push(labelText('f-msg') + ': ' + d.message);
     return lines.join('\n');

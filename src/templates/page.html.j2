@@ -7,6 +7,7 @@
 <title>{{ t.meta_title }} | {{ brand }}</title>
 <meta name="description" content="{{ t.meta_description }}">
 <meta name="theme-color" content="#30373B">
+<meta name="color-scheme" content="light">
 <meta name="format-detection" content="telephone=no">
 {%- if base_url %}
 <link rel="canonical" href="{{ page_url }}">
@@ -29,8 +30,8 @@
 <link rel="icon" href="{{ root }}assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="{{ root }}assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="{{ root }}assets/apple-touch-icon.png">
-<link rel="preload" href="{{ root }}assets/fonts/unbounded-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="{{ root }}assets/fonts/onest-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ root }}assets/fonts/unbounded-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ root }}assets/fonts/onest-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" type="image/webp" href="{{ root }}assets/img/lift-geometry-800.webp" imagesrcset="{{ root }}assets/img/lift-geometry-480.webp 480w, {{ root }}assets/img/lift-geometry-800.webp 800w" imagesizes="(min-width: 900px) 40vw, 86vw" fetchpriority="high">
 <link rel="stylesheet" href="{{ root }}css/style.css?v={{ v }}">
 <script type="application/ld+json">{{ ld_business | safe }}</script>
@@ -87,7 +88,7 @@
         <a class="btn btn-tape" href="#contact">{{ t.cta_quote }}</a>
         <a class="btn btn-ghost{% if not phone %} todo{% endif %}" href="{{ tel_href }}">{{ icon('phone') }}{{ t.cta_call }}</a>
       </div>
-      <ul class="hero-tags" aria-label="{{ t.hero_tags_label }}">
+      <ul class="hero-tags">
         {%- for tag in t.hero_tags %}<li>{{ tag }}</li>{% endfor %}
       </ul>
     </div>
@@ -265,12 +266,14 @@
         <div class="field">
           <label for="f-work">{{ t.f_work }}</label>
           <select id="f-work" name="work">
+            <option value="">{{ t.f_work_any }}</option>
             {%- for o in t.f_work_options %}<option>{{ o }}</option>{% endfor %}
           </select>
         </div>
         <div class="field field-area">
           <label for="f-area">{{ t.f_area }} <span class="hint">{{ t.f_area_hint }}</span></label>
-          <input id="f-area" name="area" type="number" inputmode="decimal" min="1" max="10000" step="any">
+          <input id="f-area" name="area" type="text" inputmode="decimal" autocomplete="off" maxlength="8" aria-describedby="f-area-err">
+          <p class="err" id="f-area-err" data-msg="{{ t.f_err_area }}"></p>
         </div>
       </div>
       <div class="field">
@@ -279,7 +282,7 @@
       </div>
       <div class="field check">
         <input id="f-consent" name="consent" type="checkbox" required aria-describedby="f-consent-err">
-        <label for="f-consent">{{ t.f_consent }} <a href="{{ privacy_href }}">{{ t.f_policy }}</a></label>
+        <label for="f-consent">{{ t.f_consent }} <a href="{{ privacy_href }}" target="_blank" rel="noopener">{{ t.f_policy }}</a></label>
         <p class="err" id="f-consent-err" data-msg="{{ t.f_err_consent }}"></p>
       </div>
       <button class="btn btn-tape btn-wide" type="submit">{{ t.f_submit }}</button>
@@ -311,9 +314,9 @@
   <a class="bar-cta" href="#contact">{{ icon('form') }}<span>{{ t.bar_form }}</span></a>
 </nav>
 
-<dialog class="lightbox" id="lightbox" aria-label="{{ t.works_title }}">
+<dialog class="lightbox" id="lightbox" aria-labelledby="lb-caption">
   <div class="lb-stage"></div>
-  <p class="lb-caption"></p>
+  <p class="lb-caption" id="lb-caption"></p>
   <button class="lb-btn lb-close" type="button" aria-label="{{ t.lb_close }}">{{ icon('close') }}</button>
   <button class="lb-btn lb-prev" type="button" aria-label="{{ t.lb_prev }}">{{ icon('left') }}</button>
   <button class="lb-btn lb-next" type="button" aria-label="{{ t.lb_next }}">{{ icon('right') }}</button>

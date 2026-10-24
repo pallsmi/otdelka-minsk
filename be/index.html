@@ -6,6 +6,7 @@
 <title>Тынкоўка, афарбоўка і аздабленне кватэр у Мінску | Аздабленне Мінск</title>
 <meta name="description" content="Тынкоўка, афарбоўка, шпалеры, плітка, адкосы і дэкаратыўнае аздабленне ў Мінску. Кватэры, новабудоўлі, пад’езды. Фота і відэа аб’ектаў, заяўка на разлік.">
 <meta name="theme-color" content="#30373B">
+<meta name="color-scheme" content="light">
 <meta name="format-detection" content="telephone=no">
 <link rel="canonical" href="https://pallsmi.github.io/otdelka-minsk/be/">
 <link rel="alternate" hreflang="ru-BY" href="https://pallsmi.github.io/otdelka-minsk/">
@@ -24,10 +25,10 @@
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<link rel="preload" href="../assets/fonts/unbounded-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../assets/fonts/onest-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/unbounded-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/onest-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" type="image/webp" href="../assets/img/lift-geometry-800.webp" imagesrcset="../assets/img/lift-geometry-480.webp 480w, ../assets/img/lift-geometry-800.webp 800w" imagesizes="(min-width: 900px) 40vw, 86vw" fetchpriority="high">
-<link rel="stylesheet" href="../css/style.css?v=d247fea7">
+<link rel="stylesheet" href="../css/style.css?v=0fea35a9">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HomeAndConstructionBusiness","name":"Аздабленне Мінск","description":"Тынкоўка, афарбоўка, шпалеры, плітка, адкосы і дэкаратыўнае аздабленне ў Мінску. Кватэры, новабудоўлі, пад’езды. Фота і відэа аб’ектаў, заяўка на разлік.","areaServed":{"@type":"City","name":"Мінск"},"address":{"@type":"PostalAddress","addressLocality":"Мінск","addressCountry":"BY"},"knowsLanguage":["ru","be"],"url":"https://pallsmi.github.io/otdelka-minsk/be/","image":"https://pallsmi.github.io/otdelka-minsk/assets/img/og.jpg"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Можна даведацца кошт без выезду?","acceptedAnswer":{"@type":"Answer","text":"Прыблізна — па фота і плошчы. Дакладна — пасля агляду: стан сцен і столяў па фота бачны не заўсёды."}},{"@type":"Question","name":"Працуеце ў новабудоўлях без аздаблення?","acceptedAnswer":{"@type":"Answer","text":"Так. Прыклады — у раздзеле «Нашы аб’екты»: тынкоўка сцен, адкосы, роспіс."}},{"@type":"Question","name":"Робіце рамонт пад’ездаў?","acceptedAnswer":{"@type":"Answer","text":"Так: афарбоўка сцен і лесвічных клетак, дэкор, аздабленне холаў каля ліфта. Фота — у раздзеле «Нашы аб’екты»."}},{"@type":"Question","name":"Можна замовіць толькі частку работ?","acceptedAnswer":{"@type":"Answer","text":"Так, напрыклад толькі афарбоўку столяў або толькі адкосы. Аб’ём абмяркоўваем на аглядзе."}},{"@type":"Question","name":"Што падрыхтаваць да прыходу майстроў?","acceptedAnswer":{"@type":"Answer","text":"Вынесці рэчы, якія можна вынесці, або ссунуць мэблю да цэнтра пакоя — астатняе накрыем плёнкай."}}]}</script>
 </head>
@@ -82,7 +83,7 @@
         <a class="btn btn-tape" href="#contact">Разлічыць кошт</a>
         <a class="btn btn-ghost todo" href="#contact"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>Патэлефанаваць</a>
       </div>
-      <ul class="hero-tags" aria-label="Тыпы аб’ектаў"><li>Новабудоўлі</li><li>Другаснае жыллё</li><li>Санвузлы</li><li>Пад’езды</li>
+      <ul class="hero-tags"><li>Новабудоўлі</li><li>Другаснае жыллё</li><li>Санвузлы</li><li>Пад’езды</li>
       </ul>
     </div>
     <figure class="hero-photo">
@@ -460,17 +461,19 @@
       <div class="field">
         <label for="f-phone">Тэлефон</label>
         <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375 __ ___-__-__" required aria-describedby="f-phone-err">
-        <p class="err" id="f-phone-err" data-msg="Пакажыце тэлефон у фармаце +375 XX XXX-XX-XX"></p>
+        <p class="err" id="f-phone-err" data-msg="Пакажыце нумар цалкам: 9 лічбаў пасля +375"></p>
       </div>
       <div class="field-row">
         <div class="field">
           <label for="f-work">Што трэба зрабіць</label>
-          <select id="f-work" name="work"><option>Тынкоўка, выраўноўванне</option><option>Афарбоўка</option><option>Шпалеры</option><option>Плітка</option><option>Адкосы</option><option>Дэкор</option><option>Пад’езд</option><option>Некалькі відаў работ</option>
+          <select id="f-work" name="work">
+            <option value="">Выберыце від работ</option><option>Тынкоўка, выраўноўванне</option><option>Афарбоўка</option><option>Шпалеры</option><option>Плітка</option><option>Адкосы</option><option>Дэкор</option><option>Пад’езд</option><option>Некалькі відаў работ</option>
           </select>
         </div>
         <div class="field field-area">
           <label for="f-area">Плошча, м² <span class="hint">калі ведаеце</span></label>
-          <input id="f-area" name="area" type="number" inputmode="decimal" min="1" max="10000" step="any">
+          <input id="f-area" name="area" type="text" inputmode="decimal" autocomplete="off" maxlength="8" aria-describedby="f-area-err">
+          <p class="err" id="f-area-err" data-msg="Пакажыце лік, напрыклад 45 або 45,5"></p>
         </div>
       </div>
       <div class="field">
@@ -479,7 +482,7 @@
       </div>
       <div class="field check">
         <input id="f-consent" name="consent" type="checkbox" required aria-describedby="f-consent-err">
-        <label for="f-consent">Згодны на апрацоўку персанальных даных для адказу на заяўку. <a href="privacy.html">Палітыка канфідэнцыяльнасці</a></label>
+        <label for="f-consent">Згодны на апрацоўку персанальных даных для адказу на заяўку. <a href="privacy.html" target="_blank" rel="noopener">Палітыка канфідэнцыяльнасці</a></label>
         <p class="err" id="f-consent-err" data-msg="Патрэбна згода на апрацоўку даных"></p>
       </div>
       <button class="btn btn-tape btn-wide" type="submit">Адправіць заяўку</button>
@@ -511,9 +514,9 @@
   <a class="bar-cta" href="#contact"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 3h12v18H6zM9 8h6M9 12h6M9 16h4"/></svg><span>Заяўка</span></a>
 </nav>
 
-<dialog class="lightbox" id="lightbox" aria-label="Нашы аб’екты">
+<dialog class="lightbox" id="lightbox" aria-labelledby="lb-caption">
   <div class="lb-stage"></div>
-  <p class="lb-caption"></p>
+  <p class="lb-caption" id="lb-caption"></p>
   <button class="lb-btn lb-close" type="button" aria-label="Закрыць"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   <button class="lb-btn lb-prev" type="button" aria-label="Папярэдняя работа"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
   <button class="lb-btn lb-next" type="button" aria-label="Наступная работа"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></button>
@@ -532,6 +535,6 @@
 </dialog>
 
 <script type="application/json" id="gallery-data">[{"kind":"photo","caption":"Хол каля ліфта: графіт і белыя лініі","w":960,"h":1280,"src":"../assets/img/lift-geometry-800.webp"},{"kind":"video","caption":"Роспіс сцяны ў новабудоўлі","w":464,"h":848,"src":"../assets/img/mural-464.webp","video":"../assets/video/mural.mp4"},{"kind":"photo","caption":"Пляцоўка каля паштовых скрынак","w":1280,"h":960,"src":"../assets/img/hall-geometry-1280.webp"},{"kind":"video","caption":"Ванная ў плітцы","w":464,"h":848,"src":"../assets/img/bath-464.webp","video":"../assets/video/bath.mp4"},{"kind":"photo","caption":"Трафарэт «лісце» па фактурнай тынкоўцы","w":1280,"h":960,"src":"../assets/img/lift-leaves-1280.webp"},{"kind":"video","caption":"Цёмная столь і белыя сцены","w":464,"h":848,"src":"../assets/img/dark-ceiling-464.webp","video":"../assets/video/dark-ceiling.mp4"},{"kind":"video","caption":"Мяжа колеру па малярнай стужцы","w":464,"h":848,"src":"../assets/img/tape-464.webp","video":"../assets/video/tape.mp4"},{"kind":"photo","caption":"Геаметрыя на сценах пад’езда","w":1280,"h":960,"src":"../assets/img/mailboxes-1280.webp"},{"kind":"video","caption":"Адкосы ўваходных дзвярэй і шпалеры","w":464,"h":848,"src":"../assets/img/door-464.webp","video":"../assets/video/door.mp4"},{"kind":"photo","caption":"Тамбур на ўваходзе ў пад’езд","w":960,"h":1280,"src":"../assets/img/entrance-800.webp"},{"kind":"video","caption":"Пакоі ў другасным жыллі: афарбоўка і шпалеры","w":464,"h":848,"src":"../assets/img/wallpaper-464.webp","video":"../assets/video/rooms.mp4"},{"kind":"video","caption":"Прыбіральня: плітка і афарбоўка","w":464,"h":848,"src":"../assets/img/wc-464.webp","video":"../assets/video/wc.mp4"},{"kind":"photo","caption":"Лесвічная пляцоўка пасля афарбоўкі","w":1280,"h":960,"src":"../assets/img/stair-leaves-1280.webp"},{"kind":"video","caption":"Тынкоўка сцен у новабудоўлі","w":464,"h":848,"src":"../assets/img/plaster-464.webp","video":"../assets/video/plaster.mp4"},{"kind":"photo","caption":"Пакой у новабудоўлі пасля аздаблення сцен","w":464,"h":848,"src":"../assets/img/new-room-464.webp"}]</script>
-<script src="../js/main.js?v=d247fea7" defer></script>
+<script src="../js/main.js?v=0fea35a9" defer></script>
 </body>
 </html>
